@@ -41,22 +41,18 @@ public class TakingTurnsQueue
         // Dequeue the next person
         Person person = _people.Dequeue();
 
-        if (person.Turns <= 0)
+        if (person.Turns > 0)
         {
+            // If they have turns left, decrement the turns
+            person.Turns -= 1;
+        }
+        
+        if (person.Turns > 0)
+        {
+            // If they still have turns left, re-enqueue them
             _people.Enqueue(person);
         }
-        else
-        {
-            // If the person has turns left, decrement their turns
-            person.Turns -= 1;
-
-            if (person.Turns > 0)
-            {
-                // If they still have turns left, re-enqueue them
-                _people.Enqueue(person);
-            }
-        }
-
+        // Return the person
             return person;
         }
     
