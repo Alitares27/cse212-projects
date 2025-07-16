@@ -41,13 +41,16 @@ public class TakingTurnsQueue
         // Dequeue the next person
         Person person = _people.Dequeue();
 
+        // If the person has no turns left, do not re-enqueue them
+        int originalTurns = person.Turns;
+
         if (person.Turns > 0)
         {
             // If they have turns left, decrement the turns
             person.Turns -= 1;
         }
         
-        if (person.Turns > 0)
+         if (originalTurns <= 0 || person.Turns > 0)
         {
             // If they still have turns left, re-enqueue them
             _people.Enqueue(person);
@@ -59,6 +62,6 @@ public class TakingTurnsQueue
 
     public override string ToString()
     {
-        return _people.ToString();
+        return $"[{string.Join(", ", _people)}]";
     }
 }

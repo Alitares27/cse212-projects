@@ -18,6 +18,10 @@ public class PersonQueue
 
     public Person Dequeue()
     {
+        if (IsEmpty())
+        {
+            throw new InvalidOperationException("The queue is empty.");
+        }
         var person = _queue[0];
         _queue.RemoveAt(0);
         return person;
